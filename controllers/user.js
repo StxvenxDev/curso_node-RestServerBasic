@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 
 const userGet = async (req,res) => {
-    const {limit = 5, since} = req.query;
+    const {limit = 5, since = 0} = req.query;
 /*     const usuarios = await User.find()
     .skip(Number(since))
     .limit(Number(limit)); */
