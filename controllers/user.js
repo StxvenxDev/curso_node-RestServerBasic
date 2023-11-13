@@ -3,11 +3,11 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 
 const userGet = async (req,res) => {
-    const {limit = 5, since = 0} = req.query;
+    const {limit = 5, since} = req.query;
 /*     const usuarios = await User.find()
     .skip(Number(since))
     .limit(Number(limit)); */
-
+    
     const [users, total] = await Promise.all([
         User.find({estate : true})
         .skip(Number(since))
@@ -48,7 +48,6 @@ const userPut = async (req,res)=>{
 
     if(password){
         const salt = bcrypt.genSaltSync(10);
-
         resto.password = bcrypt.hashSync(password,salt);
     }
 
@@ -69,8 +68,9 @@ const userPatch = (req,res)=>{
 const userDelete = async (req,res) => {
     const {id} = req.params;
     const usuario = await User.findByIdAndUpdate(id,{estate : false});
+    const uid = req.uid;
     res.json(
-        usuario
+        ({usuario,uid})
     );
 };
 

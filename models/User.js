@@ -18,7 +18,8 @@ const userSchema = Schema({
     role : {
         type : String,
         required : true,
-        emun : ['ADMIN_ROLE', 'USER_ROLE']
+        emun : ['ADMIN_ROLE', 'USER_ROLE'],
+        default : 'USER_ROLE'
     },
     img : {
         type : String
@@ -34,8 +35,11 @@ const userSchema = Schema({
 });
 
 userSchema.methods.toJSON = function () {
-    const {__v, password, ...usuario } = this.toObject();
-    return usuario;
+    const {__v, password,_id,...usuario } = this.toObject();
+    
+    usuario.uid = _id;
+
+    return usuario
 }
 
 export default model('User', userSchema);
