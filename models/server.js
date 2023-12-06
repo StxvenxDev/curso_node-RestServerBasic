@@ -4,7 +4,9 @@ import {dbConnection} from '../database/config.js'
 
 import userRouter from '../routers/user.js';
 import authRouter from '../routers/auth.js' ;
+import productRouter from '../routers/product.js';
 import categoriesRouter from '../routers/categorias.js';
+import  buscarRouter  from '../routers/buscar.js';
 class Server {
 
     constructor(){
@@ -13,11 +15,12 @@ class Server {
         this.paths = {
             user : '/api/users',
             auth : '/api/auth',
-            categories : '/api/categorias'
+            category : '/api/categorias',
+            product : '/api/product',
+            buscar : '/api/buscar',
         }
         this.database();
         this.middlewares();
-
         this.routes();
     }
 
@@ -36,9 +39,9 @@ class Server {
 
         this.app.use(this.paths.user, userRouter);
         this.app.use(this.paths.auth, authRouter);
-        this.app.use(this.paths.categories, categoriesRouter );
-
-        
+        this.app.use(this.paths.category, categoriesRouter );
+        this.app.use(this.paths.product, productRouter);
+        this.app.use(this.paths.buscar, buscarRouter );
     }
 
     listen(){

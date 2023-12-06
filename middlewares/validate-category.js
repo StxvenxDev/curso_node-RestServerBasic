@@ -1,4 +1,3 @@
-import { response, request } from "express";
 import Category from "../models/categories.js";
 
 

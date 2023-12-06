@@ -5,15 +5,10 @@ import User from "../models/User.js";
 
 
 const validateJWT = async (req = request,res = response , next) => {
-
-
     try{
         const token = req.header('x-code');
-
         const {uid} = jwt.verify(token,process.env.SECRETORPRIVATEKEY);
-
         const user = await User.findById(uid);
-
         if(!token){
             return res.status(401).json({msg : 'Token no encontrado en la peticion'});
         }
@@ -22,9 +17,7 @@ const validateJWT = async (req = request,res = response , next) => {
     }catch(err){
         console.log(err);
         return res.status(401).json({msg : 'Token invalido'});
-        
     }
-
 }
 
 export default validateJWT

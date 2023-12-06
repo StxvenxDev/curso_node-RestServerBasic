@@ -46,22 +46,17 @@ export const createCategory = async (req = request, res = response) => {
     try {
         const {name} = req.body;
         const categoriaDb = await Category.findOne({ name });
-        console.log(name);
-
         if (categoriaDb) {
             return res.status(400).json({
                 message: 'Esta categoria ya existe'
             });
         }
-
         const data = {
             name,
             user: req.user._id
         }
-
         const category = new Category(data);
         category.save();
-
         res.status(201).json({
             category
         })
@@ -74,9 +69,7 @@ export const createCategory = async (req = request, res = response) => {
 export const updateCategory = async (req = request, res = response) => {
     const {id}  = req.params;
     const {name} = req.body;  
-
     const category = await Category.findByIdAndUpdate(id,{name});
-
     res.status(201).json({
         category
     });
