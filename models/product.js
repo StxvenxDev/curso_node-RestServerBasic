@@ -28,6 +28,9 @@ const Product = Schema({
         type : Boolean,
         default : true
     },
+    img : {
+        type : String
+    }
 })
 
 Product.methods.toJSON = function () {

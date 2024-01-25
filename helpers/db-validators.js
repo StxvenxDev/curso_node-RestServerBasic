@@ -22,9 +22,18 @@ const esUserValidate = async (id) => {
     }
 }
 
+const coleccionesPermitidas = async (coleccion, colecciones = []) => {
+    const permitida = colecciones.includes(coleccion);
+    if(!permitida){
+        throw new Error(`La coleccion ${coleccion} no esta permitida. Colecciones permitidas ${colecciones}`);
+    }
+    return true;
+}
+
 
 export {
     esRolValidate,
     esEmailValidate,
-    esUserValidate
+    esUserValidate,
+    coleccionesPermitidas
 }
